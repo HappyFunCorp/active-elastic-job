@@ -28,7 +28,7 @@ module ActiveElasticJob
 
       # 172.17.0.x is the default for Docker
       # 172.18.0.x is the default for the bridge network of Docker Compose
-      DOCKER_HOST_IP = /172.1(7|8).0.\d+/.freeze
+      # DOCKER_HOST_IP = /172.1(7|8).0.\d+/.freeze
 
       def initialize(app) #:nodoc:
         @app = app
@@ -133,12 +133,12 @@ module ActiveElasticJob
       end
 
       def sent_from_docker_host?(request)
-        app_runs_in_docker_container? && ip_originates_from_docker?(request)
+        app_runs_in_docker_container? #&& ip_originates_from_docker?(request)
       end
 
-      def ip_originates_from_docker?(request)
-        (request.remote_ip =~ DOCKER_HOST_IP).present? or (request.remote_addr =~ DOCKER_HOST_IP).present?
-      end
+      # def ip_originates_from_docker?(request)
+      #   (request.remote_ip =~ DOCKER_HOST_IP).present? or (request.remote_addr =~ DOCKER_HOST_IP).present?
+      # end
 
       def app_runs_in_docker_container?
         File.exist?('/.dockerenv') || (`[ -f /proc/1/cgroup ] && cat /proc/1/cgroup` =~ /(ecs|docker)/).present?
