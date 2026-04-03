@@ -21,6 +21,6 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'active_elastic_job', :path => 'vendor/gems/active_elastic_job-current'
+gem 'active_elastic_job', github: 'HappyFunCorp/active-elastic-job'
 
 gem 'puma', '= 5.5.1'
